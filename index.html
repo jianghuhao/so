@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全能搜索</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- 配置Tailwind自定义颜色 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#f5f7fa',
+                        neutral: '#e5e9f2',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- 自定义工具类 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                @apply transition-all duration-200 hover:shadow-md hover:-translate-y-1;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- 顶部导航栏 -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center">
+            <!-- 网站标题 -->
+            <div class="flex items-center mb-3 md:mb-0">
+                <i class="fa fa-search text-primary text-2xl mr-2"></i>
+                <h1 class="text-primary text-xl font-bold">全能搜索</h1>
+            </div>
+            
+            <!-- 导航链接 -->
+            <nav class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-gray-600">
+                <a href="#" class="hover:text-primary transition-colors">首页</a>
+                <a href="#" class="hover:text-primary transition-colors">新闻</a>
+                <a href="#" class="hover:text-primary transition-colors">电影票房</a>
+                <a href="#" class="hover:text-primary transition-colors">电影订票</a>
+                <a href="#" class="hover:text-primary transition-colors">后台管理</a>
+                <a href="#" class="hover:text-primary transition-colors">今日热榜</a>
+                <a href="#" class="hover:text-primary transition-colors">评论兔小巢</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- 搜索引擎选择区 -->
+        <div class="flex flex-wrap justify-center gap-2 mb-6">
+            <button class="bg-primary text-white px-4 py-2 rounded-md flex items-center text-sm font-medium">
+                <i class="fa fa-bing mr-1"></i> Bing
+            </button>
+            <button class="bg-white text-gray-700 px-4 py-2 rounded-md flex items-center text-sm font-medium hover:bg-gray-100 transition-colors">
+                <i class="fa fa-search mr-1"></i> 百度
+            </button>
+            <button class="bg-white text-gray-700 px-4 py-2 rounded-md flex items-center text-sm font-medium hover:bg-gray-100 transition-colors">
+                <i class="fa fa-play-circle mr-1"></i> B站
+            </button>
+            <button class="bg-white text-gray-700 px-4 py-2 rounded-md flex items-center text-sm font-medium hover:bg-gray-100 transition-colors">
+                <i class="fa fa-music mr-1"></i> 抖音
+            </button>
+            <button class="bg-white text-gray-700 px-4 py-2 rounded-md flex items-center text-sm font-medium hover:bg-gray-100 transition-colors">
+                <i class="fa fa-comment mr-1"></i> 知乎
+            </button>
+            <button class="bg-white text-gray-700 px-4 py-2 rounded-md flex items-center text-sm font-medium hover:bg-gray-100 transition-colors">
+                <i class="fa fa-television mr-1"></i> 腾讯视频
+            </button>
+            <button class="bg-white text-gray-700 px-4 py-2 rounded-md flex items-center text-sm font-medium hover:bg-gray-100 transition-colors">
+                <i class="fa fa-film mr-1"></i> 爱奇艺
+            </button>
+        </div>
+        
+        <!-- 搜索框 -->
+        <div class="max-w-2xl mx-auto mb-8">
+            <div class="flex">
+                <input 
+                    type="text" 
+                    placeholder="请输入关键词..." 
+                    class="flex-1 px-4 py-3 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                >
+                <button class="bg-primary text-white px-6 py-3 rounded-r-lg font-medium hover:bg-primary/90 transition-colors">
+                    <i class="fa fa-search mr-1"></i> 搜索
+                </button>
+            </div>
+            <p class="text-xs text-gray-500 mt-2 text-center">提示：使用Ctrl+F或G或H键快速搜索</p>
+        </div>
+        
+        <!-- 快捷功能区 -->
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+            <a href="#" class="flex items-center gap-1 text-sm text-gray-600 hover:text-primary transition-colors">
+                <i class="fa fa-music"></i> 找音乐
+            </a>
+            <a href="#" class="flex items-center gap-1 text-sm text-gray-600 hover:text-primary transition-colors">
+                <i class="fa fa-shopping-bag"></i> 花瓣网
+            </a>
+            <a href="#" class="flex items-center gap-1 text-sm text-gray-600 hover:text-primary transition-colors">
+                <i class="fa fa-film"></i> 高清电影
+            </a>
+            <a href="#" class="flex items-center gap-1 text-sm text-gray-600 hover:text-primary transition-colors">
+                <i class="fa fa-video-camera"></i> 好看视频
+            </a>
+            <a href="#" class="flex items-center gap-1 text-sm text-gray-600 hover:text-primary transition-colors">
+                <i class="fa fa-code"></i> 解析视频
+            </a>
+            <a href="#" class="flex items-center gap-1 text-sm text-gray-600 hover:text-primary transition-colors">
+                <i class="fa fa-home"></i> 二手房
+            </a>
+        </div>
+        
+        <!-- 常用网站区域 -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-5 flex items-center">
+                <i class="fa fa-th-large text-primary mr-2"></i> 常用网站
+            </h2>
+            
+            <!-- 网站网格 - 响应式布局 -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3">
+                <!-- 第一行 -->
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">有道翻译</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">天气预报</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">知乎新闻</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">百度新闻</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">热点聚合</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">明月音乐</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">音乐搜索</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">种子音乐</a>
+                
+                <!-- 第二行 -->
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">音乐铃声</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">网易音乐</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">听广播台</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">QQ邮箱</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">临时邮箱</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">日历节日</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">在线PS</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">在线PS图艺</a>
+                
+                <!-- 第三行 -->
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">稿定海报</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">腾讯文档</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">去水印图片</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">复杂去水印</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">手写查字</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">识字工具</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">图片转文字</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">图片识字</a>
+                
+                <!-- 第四行 -->
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">在线白板</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">好用白板</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">国外白板</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">PDF转格式</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">PDF工具集</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">文件格式</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">爱企查</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">商标查询</a>
+                
+                <!-- 第五行 -->
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">发票数字</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">图片放大</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">放大4倍</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">改图放大</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">放大卡通</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">转矢量图</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">美图Wheel</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">美图秀秀</a>
+                
+                <!-- 第六行 -->
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">豆包AI</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">Kimi AI</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">AI文章</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">天工ai</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">秘塔ai</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">写歌ai</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">vega作图ai</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">即梦画图ai</a>
+                
+                <!-- 第七行 -->
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">百度画ai</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">喔ai提示词</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">图片ai</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">阿里魔塔</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">讯飞ppt生成</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">AI生成ppt</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">抠图全能</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">帮抠图</a>
+                
+                <!-- 第八行 -->
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">re抠图</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">抠图ai</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">人像抠图</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">图片版权</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">免费字体</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">字由字体</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">字笑字体</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">3D字体</a>
+                
+                <!-- 第九行 -->
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">神采字体</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">批量抠图</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">度加ai视频</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">既创ai视频</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">自动剪辑神</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">有言3D人</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">录制屏幕</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">视频转卡通</a>
+                
+                <!-- 第十行 -->
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">浏览器插件</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">A5工具集合</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">图片换脸</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">分离人声</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">视频去水印</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">抖音去水印</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">Logo标志</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">标智客logo</a>
+                
+                <!-- 第十一行 -->
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">品牌设计</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">设计协作</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">AI会议记录</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">证件照</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">AI扩图背景</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">AI画一画</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">星流ai画</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">AI画提示词</a>
+                
+                <!-- 第十二行 -->
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">星流ai图片</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">可灵AI视频</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">福星狮导航</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">AI工具集</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">当贝ai</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">BingAi4</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">数字人配音</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">腾讯元宝</a>
+                
+                <!-- 第十三行 -->
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">百度ai助手</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">海音音乐ai</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">知呼管家ai</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">智谱清言</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">清影ai视频</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">混元ai视频</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">即梦ai视频</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">Vidu视频ai</a>
+                
+                <!-- 第十四行 -->
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">海螺ai视频</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">探索未至ai</a>
+                <a href="#" class="p-3 bg-gray-50 rounded-lg text-center text-sm text-gray-700 hover:bg-primary/5 card-hover">B站视频</a>
+            </div>
+        </div>
+    </main>
+    
+    <!-- 页脚 -->
+    <footer class="bg-white mt-10 py-6 border-t border-gray-200">
+        <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
+            <p>© 2023 全能搜索 - 聚合全网优质资源</p>
+            <p class="mt-2">本站提供的链接仅供学习交流使用，如有侵权请联系删除</p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // 实现搜索功能
+        document.querySelector('button').addEventListener('click', function() {
+            const searchInput = document.querySelector('input');
+            const searchTerm = searchInput.value.trim();
+            
+            if (searchTerm) {
+                // 默认使用Bing搜索
+                window.location.href = `https://www.bing.com/search?q=${encodeURIComponent(searchTerm)}`;
+            }
+        });
+        
+        // 按Enter键搜索
+        document.querySelector('input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('button').click();
+            }
+        });
+        
+        // 实现搜索引擎切换
+        const searchEngines = document.querySelectorAll('.flex.flex-wrap.justify-center.gap-2 button');
+        searchEngines.forEach(engine => {
+            engine.addEventListener('click', function() {
+                // 移除所有按钮的选中状态
+                searchEngines.forEach(btn => {
+                    btn.classList.remove('bg-primary', 'text-white');
+                    btn.classList.add('bg-white', 'text-gray-700');
+                });
+                
+                // 设置当前按钮为选中状态
+                this.classList.remove('bg-white', 'text-gray-700');
+                this.classList.add('bg-primary', 'text-white');
+            });
+        });
+        
+        // 实现快捷键搜索功能 (Ctrl+F, G, H)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && ['f', 'g', 'h'].includes(e.key.toLowerCase())) {
+                e.preventDefault();
+                document.querySelector('input').focus();
+            }
+        });
+    </script>
+</body>
+</html>
